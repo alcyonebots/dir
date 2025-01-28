@@ -3,6 +3,7 @@ import zipfile
 import requests
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+import base64
 
 # GitHub Configuration
 GITHUB_TOKEN = "."
@@ -17,12 +18,19 @@ def upload_to_github(file_path, repo_path):
     url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{repo_path}"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
     
+    # Read the file content as bytes
     with open(file_path, "rb") as f:
-        content = f.read().encode("base64").decode()  # Base64 encode the file content
+        content = f.read()
+
+    # Base64 encode the file content
+    content_base64 = base64.b64encode(content).decode("utf-8")
+    
     data = {
         "message": f"Add {repo_path}",
-        "content": content,
+        "content": content_base64,
     }
+    
+    # Make the PUT request to GitHub API
     response = requests.put(url, json=data, headers=headers)
     return response.status_code, response.json()
 
