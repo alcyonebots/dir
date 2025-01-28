@@ -31,12 +31,13 @@ def handle_file(update: Update, context: CallbackContext):
     if not os.path.exists(TEMP_DIR):
         os.makedirs(TEMP_DIR)
 
-    file = update.message.document
+    file = update.message.document  # Get the document object
     file_name = file.file_name
     file_path = os.path.join(TEMP_DIR, file_name)
 
-    # Download the file
-    file.download(custom_path=file_path)
+    # Get the File object and download the file
+    telegram_file = context.bot.get_file(file.file_id)
+    telegram_file.download(custom_path=file_path)
     update.message.reply_text(f"✅ File '{file_name}' received. Processing...")
 
     # Check if the file is a ZIP
@@ -80,7 +81,7 @@ def start(update: Update, context: CallbackContext):
 def main():
     TELEGRAM_TOKEN = "7918162797:AAGRfFzQzJiMYdO-3OUZMtR2-D_JSV00IZ4"
 
-    updater = Updater(TELEGRAM_TOKEN)
+    updater = Updater(TELEGRAM_TOKEN, use_context=True)
     dispatcher = updater.dispatcher
 
     # Command Handlers
