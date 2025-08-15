@@ -8,7 +8,7 @@ import base64
 # GitHub Configuration
 GITHUB_TOKEN = "."
 REPO_OWNER = "alcyonebots"
-REPO_NAME = "shenhe"
+REPO_NAME = "auto"
 
 # Temporary storage for downloaded files
 TEMP_DIR = "temp_dir"
@@ -87,7 +87,7 @@ def start(update: Update, context: CallbackContext):
 
 # Main Function
 def main():
-    TELEGRAM_TOKEN = "7918162797:AAGRfFzQzJiMYdO-3OUZMtR2-D_JSV00IZ4"
+    TELEGRAM_TOKEN = "8318025596:AAHoRYdBcq2ZvvfNOA_moasrJhopLpph9t0"
 
     updater = Updater(TELEGRAM_TOKEN, use_context=True)
     dispatcher = updater.dispatcher
