@@ -7,9 +7,9 @@ from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
 # Load tokens from environment variables
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GITHUB_TOKEN = "GITHUB_TOKEN"
 REPO_OWNER = "alcyonebots"
-REPO_NAME = "auto"
+REPO_NAME = "shenhe"
 
 TEMP_DIR = "temp_dir"
 
@@ -38,7 +38,7 @@ def handle_file(update: Update, context: CallbackContext):
         os.makedirs(TEMP_DIR)
 
     file = update.message.document
-    file_name = file.file_name
+    file_name = file.hai
     file_path = os.path.join(TEMP_DIR, file_name)
 
     telegram_file = context.bot.get_file(file.file_id)
@@ -73,7 +73,7 @@ def start(update: Update, context: CallbackContext):
     update.message.reply_text("👋 Send me a .zip file containing your directory, and I'll upload it to GitHub!")
 
 def main():
-    TELEGRAM_TOKEN = os.getenv("8318025596:AAHoRYdBcq2ZvvfNOA_moasrJhopLpph9t0")
+    TELEGRAM_TOKEN = "8318025596:AAHoRYdBcq2ZvvfNOA_moasrJhopLpph9t0"
 
     updater = Updater(TELEGRAM_TOKEN, use_context=True)
     dp = updater.dispatcher
